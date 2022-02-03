@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "254512806098",
+    "firebase_url": "https://shaparak-732ff.firebaseio.com",
+    "project_id": "shaparak-732ff",
+    "storage_bucket": "shaparak-732ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254512806098:android:25aac95170abe41e19550b",
+        "android_client_info": {
+          "package_name": "com.example.admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254512806098-14ofufhqnpnjhn1cd2cc2ln5mi6j53pp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7-Tv0jWqujgXVM2iVw-EAmHNdToGGSto"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254512806098-14ofufhqnpnjhn1cd2cc2ln5mi6j53pp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254512806098:android:9084a0cf9a5cd77919550b",
+        "android_client_info": {
+          "package_name": "com.example.database"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254512806098-14ofufhqnpnjhn1cd2cc2ln5mi6j53pp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7-Tv0jWqujgXVM2iVw-EAmHNdToGGSto"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254512806098-14ofufhqnpnjhn1cd2cc2ln5mi6j53pp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254512806098:android:33fe5667dcd471db19550b",
+        "android_client_info": {
+          "package_name": "com.tutia.shaparak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254512806098-14ofufhqnpnjhn1cd2cc2ln5mi6j53pp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7-Tv0jWqujgXVM2iVw-EAmHNdToGGSto"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254512806098-14ofufhqnpnjhn1cd2cc2ln5mi6j53pp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
