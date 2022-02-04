@@ -12,14 +12,12 @@ class Item with ChangeNotifier {
   Item({
     @required this.title,
     @required this.author,
-
     @required this.id,
     @required this.category,
     @required this.content,
     @required this.startColor,
     @required this.endColor,
     this.isFavorite = false,
-
   });
   void toggleFavoriteStatus() {
     isFavorite = !isFavorite;

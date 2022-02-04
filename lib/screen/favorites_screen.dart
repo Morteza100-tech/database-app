@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../provider/items.dart';
-import '../widget/itemCard.dart';
+import '../widget/item_card.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({Key? key}) : super(key: key);
@@ -25,7 +26,6 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
 
   @override
   initState() {
-    
     getPref();
     super.initState();
   }

@@ -1,15 +1,15 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'dart:convert';
 import 'package:http/http.dart' as http;
+
 import './item.dart';
 
 class Items with ChangeNotifier {
   List<Item> _items = [];
-  List<Item> get items {
-    return [..._items];
-  }
+
+  List<Item> get items => _items;
 
   Item findById(String id) {
     return _items.firstWhere((item) => item.id == id);
@@ -17,13 +17,17 @@ class Items with ChangeNotifier {
 
   Future<void> fetchAndSetItems() async {
     const url = 'https://shaparak-732ff.firebaseio.com/items.json';
+
     try {
       final response = await http.get(Uri.parse(url));
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
-      if (extractedData == null) {
+
+      if (extractedData.isEmpty) {
         return;
       }
+
       final List<Item> loadedProducts = [];
+
       extractedData.forEach((prodId, prodData) {
         loadedProducts.add(Item(
           id: prodId,
@@ -35,16 +39,16 @@ class Items with ChangeNotifier {
           endColor: prodData['endColor'],
         ));
       });
+
       _items = loadedProducts;
+
+      print(_items);
       notifyListeners();
     } catch (error) {
+      print(error);
       throw (error);
     }
   }
-
-
-
-
 
   // Future<void> addItem(Item item) async {
   //   const url = 'https://shaparak-732ff.firebaseio.com/items.json';

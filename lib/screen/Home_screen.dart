@@ -1,13 +1,15 @@
 // ignore_for_file: must_be_immutable
 
-import './favorites_screen.dart';
 import 'package:flutter/material.dart';
-import './add_new_story_screen.dart';
-import '../provider/items.dart';
-
 import 'package:provider/provider.dart';
 
+import './add_new_story_screen.dart';
+import './favorites_screen.dart';
+import '../provider/items.dart';
 import '../widget/items_grid.dart';
+
+// TODO : I've changed this file name from Home_screen.dart to home_screen.dart
+// TODO : Here is the reason : https://dart-lang.github.io/linter/lints/file_names.html
 
 class HomeScreen extends StatefulWidget {
   String title;
