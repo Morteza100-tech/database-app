@@ -1,11 +1,18 @@
 import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
-import '../provider/item.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../provider/item.dart';
 import '../provider/items.dart';
 import '../screen/add_new_story_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../preferences.dart';
+
+// TODO : I've this file name from ItemCard.dart to item_card.dart
+// TODO : reason : https://dart-lang.github.io/linter/lints/file_names.html
+// TODO : more info on best practises : https://dart.dev/guides/language/effective-dart
+// TODO : https://iiro.dev/putting-build-methods-on-a-diet/
+// TODO : https://iiro.dev/splitting-widgets-to-methods-performance-antipattern/
 
 //import 'package:cached_network_image/cached_network_image.dart';
 
@@ -19,30 +26,50 @@ class ItemCard extends StatefulWidget {
 }
 
 class _ItemCardState extends State<ItemCard> {
-  SharedPreferences? pref;
+  late SharedPreferences pref;
   List<String> favs = [];
-  
-  // getPref() async {
-  //   pref = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     favs = pref?.getStringList('favorited') ?? [];
-  //   });
-  //   print(favs.toString());
-  // }
+
+  getPref() async {
+    // TODO: Extract this code to a separate class. Because it being call base on the Item cards size.
+    // TODO: if you have 10 cards, then it's called 10x.
+    pref = await SharedPreferences.getInstance();
+    setState(() {
+      favs = pref.getStringList('favorited') ?? [];
+    });
+    // TODO: Hard Reload your app an see the output.
+    print('FAV list : $favs');
+  }
 
   @override
   void didChangeDependencies() {
-    preferences.prefs;
+    // preferences.prefs;
     super.didChangeDependencies();
+  }
+
+  @override
+  void initState() {
+    getPref(); // TODO: Get the Favs list. Must be don't somewhere else.
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final item = Provider.of<Item>(context);
     bool isFav = favs.any((element) => element == item.id);
-    if (isFav && item.isFavorite == false) {
-      item.toggleFavoriteStatus();
-    }
+
+    // TODO : This will help you see the what is happening when you
+    // TODO : the Favorite icon.
+    print(favs);
+    print(item.id);
+    print('IS fav $isFav');
+    print('********');
+
+    // TODO: I am not sure why this code
+    // TODO: Its throw an error. Un comment and see the log output.
+    // TODO: you can't mark a widget as to be build when it's being build.
+    // if (isFav && item.isFavorite == false) {
+    //   item.toggleFavoriteStatus();
+    // }
     //Start Color
     String startColorValueString =
         item.startColor!.split('(0x')[1].split(')')[0];
@@ -142,15 +169,28 @@ class _ItemCardState extends State<ItemCard> {
                     onTap: () async {
                       List<String> favoritedItems = [];
                       favoritedItems
-                          .addAll(pref?.getStringList('favorited') ?? []);
+                          .addAll(pref.getStringList('favorited') ?? []);
                       if (isFav == true) {
                         favoritedItems
                             .removeWhere((element) => element == item.id);
-                        await pref?.setStringList('favorited',
-                            [...favoritedItems, item.id as String]);
+                        await pref.setStringList('favorited', favoritedItems);
                         print('item.id: ${item.id}');
+                      } else {
+                        final _itemId = item.id ?? '';
+
+                        if (_itemId.isNotEmpty &&
+                            !favoritedItems.contains(_itemId)) {
+                          // TODO : You can remvove this check. Did it to prevent double ID in the list.
+                          favoritedItems.add(_itemId);
+
+                          await pref.setStringList('favorited', favoritedItems);
+                          print('FAVS : ${pref.get('favorited')}');
+                        }
                       }
                       item.toggleFavoriteStatus();
+
+                      // TODO: get the new Favs list.
+                      await getPref();
                     },
                     child: Container(
                       width: 40,
@@ -161,9 +201,10 @@ class _ItemCardState extends State<ItemCard> {
                       ),
                       child: Center(
                         child: Icon(
-                          item.isFavorite
-                              ? Icons.favorite
-                              : Icons.favorite_border,
+                          // TODO: Use the [[isFav]] variable instead of
+                          // TODO: checking on the item because you've already
+                          // TODO: do the work above
+                          isFav ? Icons.favorite : Icons.favorite_border,
                           color: Colors.white,
                         ),
                       ),

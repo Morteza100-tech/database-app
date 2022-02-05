@@ -1,18 +1,13 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import './screen/Home_screen.dart';
-import './screen/add_new_story_screen.dart';
-import 'package:provider/provider.dart';
-import './provider/items.dart';
-import './provider/item.dart';
-import './screen/favorites_screen.dart';
-
-//import 'package:provider/provider.dart';
-import 'package:http/http.dart' as http;
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
+
+import './provider/item.dart';
+import './provider/items.dart';
+import './screen/add_new_story_screen.dart';
+import './screen/favorites_screen.dart';
+import './screen/home_screen.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -27,12 +22,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(
-          value: Items(),
-        ),
-        ChangeNotifierProvider.value(
-          value: Item(),
-        ),
+        // TODO: the main problem was here
+        // TODO: You cannot use ChangeNotifierProvider.value to create a new Object.
+        // TODO: In this case Items() and Item()
+        // TODO : Resources : https://pub.dev/packages/provider#usage
+        ChangeNotifierProvider(create: (_) => Items()),
+        ChangeNotifierProvider(create: (_) => Item()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -49,4 +44,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

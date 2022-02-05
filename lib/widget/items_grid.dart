@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import './item_card.dart';
 import '../provider/items.dart';
-import './itemCard.dart';
 
 class ItemsGrid extends StatelessWidget {
   const ItemsGrid({Key? key}) : super(key: key);
@@ -9,7 +10,9 @@ class ItemsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final itemsData = Provider.of<Items>(context);
+
     final items = itemsData.items;
+
     return GridView.builder(
       itemCount: items.length,
       itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
